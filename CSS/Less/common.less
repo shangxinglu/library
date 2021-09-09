@@ -1,0 +1,738 @@
+@px: px;
+@rate: 1;
+
+
+/*
+ * @desc 生成状态样式
+ * 
+ * @params @attr 属性
+ * @params @data 状态数据
+ */
+#genList(@attr, @data) {
+    each(@data, .(@value, @name) {
+            &--@{name} {
+                @{attr}: @value;
+            }
+        }
+
+    )
+}
+
+:root {
+    /* 主色 */
+    --global-color-main: #ee0a42;
+
+    /* 背景色 */
+    --global-bg-n1: #f7f8fa;
+    --global-bg-n2: #f2f3f5;
+
+    /* 边框、线色 */
+    --global-border-n3: #ebedf0;
+    --global-border-n4: #dcdee0;
+
+    /* 文字色 */
+    /* disable、提示文字等 */
+    --global-font-n5: #c8c9cc;
+    /* 辅助、说明文字 */
+    --global-font-n6: #969799;
+    /* 主文字2 */
+    --global-font-n7: #646566;
+    /* 主文字1 */
+    --global-font-n8: #323233;
+    /* 黑色 */
+    --global-color-b: #000000;
+    /* 白色 */
+    --global-color-w: #ffffff;
+
+    /* 功能色 */
+    /* 文字链颜色 */
+    --global-color-mw: #576b95;
+    /* 成功色 */
+    --global-color-mg: #07c160;
+    /* 报错色 */
+    --global-color-mr: #ee0a24;
+    /* 通知消息文本色 */
+    --global-color-o4: #ed6a0c;
+    /* 通知消息背景色 */
+    --global-color-y1: #fffbeb;
+    /* 文字辅助色 */
+    --global-color-cy4: #faab0c;
+}
+
+
+/**********************布局**********************/
+.float {
+    display: flow-root;
+
+    &::after {
+        display: block;
+        content: " ";
+        clear: both;
+    }
+
+    &--lt {
+        float: left;
+    }
+
+    &--rt {
+        float: right;
+    }
+}
+
+.flex {
+    #flex(){
+        display: flex;
+    }
+
+    #flex();
+    &--inline {
+        display: inline-flex;
+    }
+
+    &--center {
+        #flex();
+
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+
+        &--v {
+            #flex();
+
+            align-content: center;
+            align-items: center;
+        }
+
+        &--h {
+            #flex();
+
+            justify-content: center;
+        }
+    }
+
+    // 常用组合
+    &--comp {
+        display: flex;
+    }
+
+    &--sb {
+        #flex();
+
+        justify-content: space-between;
+
+        &--col {
+            #flex();
+
+            justify-content: space-between;
+            flex-direction: column;
+        }
+    }
+
+    &--sa {
+        #flex();
+
+        justify-content: space-around;
+    }
+
+    &--wrap {
+        #flex();
+
+        flex-wrap: wrap;
+    }
+
+    // align
+    &__align {
+        &__cnt {
+            &--c {
+                align-content: center;
+            }
+
+            &--fe {
+                align-content: flex-end;
+            }
+        }
+
+        &__item {
+            &--c {
+                align-items: center;
+            }
+
+            &--fe {
+                align-items: flex-end;
+            }
+        }
+
+        &__self {
+            &--fe {
+                align-self: flex-end;
+            }
+        }
+    }
+
+    //just
+    &__just {
+        &--c {
+            justify-content: center;
+        }
+
+        &--fe {
+            justify-content: flex-end;
+        }
+
+        &--fs {
+            justify-content: flex-start;
+        }
+    }
+
+    &__wrap {
+        flex-wrap: wrap;
+    }
+
+    //flex-direction
+    &__dir {
+        &--col {
+            flex-direction: column;
+        }
+
+        &--row {
+            flex-direction: row;
+        }
+    }
+
+    &__item {
+        flex: 1;
+    }
+}
+
+/**********************位置**********************/
+
+.fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.relative {
+    position: relative;
+}
+
+.z-index {
+    @config: -1, 0, 1, 9, 10, 20, 30, 99, 999;
+
+    each( @config,{
+        &--@{value} {
+            z-index: @value;
+        }
+    })
+}
+
+/**********************样式**********************/
+
+.box {
+    &--square {
+        position: relative;
+        padding-left: 100%;
+        padding-top: 100%;
+        width: 0;
+    }
+
+    &--inline {
+        display: inline;
+
+        &--block {
+            display: inline-block;
+        }
+    }
+
+    &__size {
+        box-sizing: border-box;
+    }
+
+    &__over {
+        overflow: hidden;
+    }
+
+    &__width {
+        width: 100%;
+        &--mc {
+            width: max-content;
+        }
+    }
+}
+
+
+.color {
+    .config() {
+        main: var(--global-color-main);
+        n5: var(--global-font-n5);
+        n6: var(--global-font-n6);
+        n7: var(--global-font-n7);
+        n8: var(--global-font-n8);
+        b: var(--global-color-b);
+        w: var(--global-color-w);
+        /* 文字链颜色 */
+        mv: var(--global-color-mv);
+        mg: var(--global-color-mg);
+        /* 报错色 */
+        mr: var(--global-color-mr);
+        /* 通知消息文本色 */
+        o4: var(--global-color-o4);
+        /* 通知消息背景色 */
+        y1: var(--global-color-y1);
+        /* 文字辅助色 */
+        cy4: var(--global-color-cy4);
+        current: currentColor;
+    }
+
+    #genList(color, .config());
+}
+
+.bg {
+    &__color {
+        #config() {
+            main: var(--global-color-main);
+            cyan: cyan;
+            blank: blank;
+            white: white;
+            pink: pink;
+            orange: orange;
+            yellow: yellow;
+            current: currentColor;
+            cy4: var(--global-color-cy4);
+            n1: var(--global-bg-n1);
+            n2: var(--global-bg-n2);
+            n8: var(--global-font-n8);
+        }
+
+        #genList(background-color, #config());
+    }
+
+    &__attach {
+        &--fixed {
+            background-attachment: fixed;
+        }
+    }
+
+    // position
+    &__ps {
+        &--center {
+            background-position: center;
+        }
+    }
+
+    &__size {
+        &--stretch {
+            background-size: 100% 100%;
+        }
+
+        &--cover {
+            background-size: cover;
+        }
+    }
+}
+
+
+/*
+ * 创建margin和padding基本样式
+ */
+@attrList: margin, padding;
+
+#attrConfig() {
+    top: top;
+    right: right;
+    bottom: bottom;
+    left: left;
+    tb: top bottom;
+    lr: left right;
+}
+
+@start: 0;
+@end: 40;
+@step: 1;
+
+
+
+each(@attrList, .(@attr) {
+        .@{attr} {
+            each(range(@start, @end, @step), .(@size) {
+                    &--@{size} {
+                        @{attr}: unit(@rate*@size, @px);
+                    }
+                }
+
+            );
+
+            each(#attrConfig(), .(@attrValue, @attrName) {
+                    &__@{attrName} {
+                        each(range(@start, @end, @step), .(@size) {
+                                &--@{size} {
+                                    each(@attrValue, .(@item) {
+                                            @{attr}-@{item}:unit(@rate*@size, @px);
+                                        }
+
+                                    );
+                                }
+                            }
+
+                        );
+
+                        &--auto {
+                            each(@attrValue, .(@item) {
+                                    @{attr}-@{item}: auto;
+                                }
+
+                            );
+                        }
+
+                    }
+                }
+
+            )
+        }
+    }
+
+) .opacity {
+    @start: 0;
+    @end: 10;
+    @step: 1;
+
+    each(range(@start, @end, @step), .(@value) {
+            #opacity(@opacity) when(@opacity<10) {
+                &--f@{opacity} {
+                    opacity: (@opacity/10);
+                }
+            }
+
+            #opacity(@opacity) when(@opacity=10) {
+                &--1 {
+                    opacity: 1;
+                }
+            }
+
+            #opacity(@value);
+
+        }
+
+    )
+}
+
+/**
+ * 字体 
+ */
+.font {
+    #standard() {
+
+        /* 超大标题 */
+        t12: 30, 10, 700;
+        /* 大标题 */
+        t11: 26, 8, 500;
+        /* 标准标题 */
+        t10: 20, 8, 500;
+        /* 标准标题 */
+
+        t9: 18, 6, 500;
+        /* 正文5 大部分正文+导航栏文字 */
+
+        t8: 17, 6, 400;
+        /* 正文5 大部分正文+导航栏文字 */
+        t7: 16, 6, 400;
+        /* 正文4 信息较多且需要多呈现时 */
+        t6: 15, 6, 400;
+        /* 正文3 信息较多且需要多呈现时 */
+        t5: 14, 6, 400;
+        /* 正文2 对主题进行释义的文字+协议条款等文字 */
+        t4: 13, 6, 400;
+        /* 正文1 对主题进行释义的文字+协议条款等文字 */
+        t3: 12, 4, 400;
+        /* 标签栏辅助文字 */
+        t2: 10, 4, 500;
+        /* 表单中数据文字 */
+        t1: 8, 2, 400
+    }
+
+
+
+    each(#standard(), .(@value, @name) {
+            &--@{name} {
+                @size: extract(@value, 1);
+                @lineHeight: extract(@value, 2);
+                @weight: extract(@value, 2);
+
+                font-size: unit(@size*@rate, @px);
+                line-height: unit(@size*@rate+@lineHeight*@rate, @px);
+
+                font-weight: @weight;
+            }
+        }
+
+    ) &__size {
+        @start: 8;
+        @end: 30;
+        @step: 1;
+
+        each(range(@start, @end, @step), .(@size) {
+                &--@{size} {
+                    font-size: unit(@size*@rate, @px); ;
+                }
+            }
+
+        )
+    }
+
+    // font-weight
+    &__weight {
+        #weightList() {
+            3: 300;
+            4: 400;
+            5: 500;
+            6: 600;
+            7: 700;
+        }
+
+        ;
+
+        #genList(font-weight, #weightList())
+    }
+
+    &__style {
+        &--i {
+            font-style: italic;
+        }
+    }
+}
+
+.text {
+    &__over {
+        #ellipsis() {
+            overflow: hidden;
+            display: -webkit-box;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            color: currentColor;
+        }
+
+        &--ellipsis {
+            #ellipsis();
+
+            &--1 {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            &--3 {
+                #ellipsis();
+                -webkit-line-clamp: 3;
+            }
+        }
+    }
+
+    &__underline {
+        &--default {
+            text-decoration: line-through;
+        }
+
+        position: relative;
+
+        &::after {
+            position: absolute;
+            top: 0.7em;
+            left: 0;
+            padding: 0 unit(@rate * 1, @px);
+            display: block;
+            content: " ";
+            width: 100%;
+            height: 1px;
+            background-color: currentColor;
+        }
+    }
+
+    // line-height
+    &__lh {
+        &--f8 {
+            line-height: 0.8;
+        }
+
+        &--1 {
+            line-height: 1;
+        }
+    }
+
+
+    // text-align
+    &__align {
+        #config() {
+            lt: left;
+            c: center;
+            rt: right;
+        }
+
+        ;
+        #genList(text-align, #config());
+    }
+
+    // white-space
+    &__ws {
+        &--no {
+            white-space: nowrap;
+        }
+
+        &--warp {
+            white-space: normal;
+        }
+    }
+
+    &__max {
+        @start: 2;
+        @end: 13;
+        @step: 1;
+
+        each(range(@start, @end, @step), .(@size) {
+                &--@{size} {
+                    overflow: hidden;
+                    max-width: unit(@size, em);
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+            }
+
+        )
+    }
+}
+
+.border {
+    border: 0.5px solid currentColor;
+
+    @attrList: top,
+    bottom,
+    left,
+    right;
+
+    @config: 0.5,
+    1,
+    2,
+    3,
+    4,
+    5;
+
+    each(@config, {
+            #border(@size) when(@size>=1) {
+                &--@{size} {
+                    border: unit(@size,@px) solid;
+                }
+            }
+
+            #border(@size) when(@size<1) {
+                @name:@size*10;
+                &--f@{name} {
+                    border: unit(@size,@px) solid;
+                }
+            }
+            #border(@value);
+
+        })
+
+        each(@attrList,.(@attr) {
+            &__@{attr} {
+                each(@config, {
+                    #border(@size) when(@size>=1) {
+                        &--@{size} {
+                            border-@{attr}: unit(@size,@px) solid;
+                        }
+                    }
+        
+                    #border(@size) when(@size<1) {
+                        @name:@size*10;
+                        &--f@{name} {
+                            border-@{attr}: unit(@size,@px) solid;
+                        }
+                    }
+                    #border(@value);
+        
+                })
+        
+             
+            }
+        }
+        )
+
+        // border-color
+        &__color {
+            #config(){
+                cyan: cyan;
+                blank: blank;
+                white: white;
+                pink: pink;
+                orange: orange;
+                yellow: yellow;
+                current: currentColor;
+                main: var(--global-color-main);
+                n3: var(--global-border-n3);
+                n4: var(--global-border-n4);
+            };
+
+            #genList(border-color, #config());
+        }
+
+        &__radius {
+            border-radius: 1000px;
+
+            each(range(4,20,1),.(@size){
+                &--@{size} {
+                    border-radius: unit(@size * @rate,@px);
+                }
+            })
+        }
+    }
+
+
+    .image {
+        &--stretch {
+            width: 100%;
+            height: 100%;
+    
+            &--abs {
+                position: absolute;
+                top: 0;
+                left: 0;
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    
+        &__margin {
+            &--clear {
+                vertical-align: middle;
+                line-height: 1;
+            }
+        }
+    }
+    
+    .shadow {
+        box-shadow: 0 4rpx 24rpx 0 rgba(100, 101, 102, 0.12);
+    }
+    
+    .button {
+        &--disable {
+            opacity: 0.5;
+        }
+    }
+    
+    .scroll {
+        &__fill {
+            &::after {
+                display: block;
+                content: "";
+                min-width: 0.1px;
+            }
+        }
+    }
+    
